@@ -1,0 +1,15 @@
+route:
+  receiver: 'slack'
+
+receivers:
+  - name: 'slack'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/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'   
+        channel: '#prometheus-alerts'                                   
+        username: 'Prometheus'
+        send_resolved: true
+        text: |
+          *[{{ .Status | toUpper }}]* Alert: {{ .CommonLabels.alertname }}
+          Instance: {{ .CommonLabels.instance }}
+          Summary: {{ .CommonAnnotations.summary }}
+          Description: {{ .CommonAnnotations.description }}
